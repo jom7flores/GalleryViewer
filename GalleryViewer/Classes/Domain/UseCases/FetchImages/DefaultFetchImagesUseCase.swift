@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Photos
 
 class DefaultFetchImagesUseCase: FetchImagesUseCase {
 
@@ -15,16 +16,22 @@ class DefaultFetchImagesUseCase: FetchImagesUseCase {
     init(provider: LocalImageProvider) {
         self.provider = provider
     }
-    
+
     func start() -> AnyPublisher<[ImageThumbnail], Error> {
-        Future { promise in
-            promise(.success(
-                (0...500).map {
-                    ImageThumbnail(id: "\($0)", dateAdded: Date(), location: nil, resource: nil, isFavorite: Bool.random())
-                }
-            ))
-        }
-        .eraseToAnyPublisher()
+        provider.fetchAssets()
+            .map { $0.map { $0.mapToImageThumbnail } }
+            .eraseToAnyPublisher()
     }
 }
 
+extension PHAsset {
+    var mapToImageThumbnail: ImageThumbnail {
+        ImageThumbnail(
+            id: localIdentifier,
+            dateAdded: creationDate,
+            location: location?.coordinate,
+            resource: nil,
+            isFavorite: isFavorite
+        )
+    }
+}

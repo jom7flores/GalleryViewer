@@ -10,14 +10,15 @@ import Photos
 
 class DefaultLocalImageProvider: LocalImageProvider {
 
-    func requestMediaAccess() -> AnyPublisher<PHAuthorizationStatus, Never> {
-        let status: PHAuthorizationStatus
+    var status: PHAuthorizationStatus {
         if #available(iOS 14, *) {
-            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+            return PHPhotoLibrary.authorizationStatus(for: .readWrite)
         } else {
-            status = PHPhotoLibrary.authorizationStatus()
+            return PHPhotoLibrary.authorizationStatus()
         }
+    }
 
+    func requestMediaAccess() -> AnyPublisher<PHAuthorizationStatus, Never> {
         guard status == .notDetermined else {
             return Just(status).eraseToAnyPublisher()
         }
@@ -38,7 +39,24 @@ class DefaultLocalImageProvider: LocalImageProvider {
     }
 
     func fetchAssets() -> AnyPublisher<[PHAsset], Error> {
-        Just([]).setFailureType(to: Error.self).eraseToAnyPublisher()
+        guard status == .authorized else {
+            return Fail(outputType: [PHAsset].self, failure: ImageProviderError.notAuthorized)
+                .eraseToAnyPublisher()
+        }
+        return Future { promise in
+            DispatchQueue.global().async {
+                let options = PHFetchOptions()
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+                options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
+                let result = PHAsset.fetchAssets(with: options)
+                promise(.success(result.objects(at: IndexSet(0..<result.count))))
+            }
+        }
+        .eraseToAnyPublisher()
     }
 
+}
+
+enum ImageProviderError: Error {
+    case notAuthorized
 }
