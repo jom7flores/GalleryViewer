@@ -17,10 +17,14 @@ class MainViewController: UIViewController {
     
 
     @IBAction func moevete() {
+        let mediaProvider = DefaultLocalImageProvider()
         navigationController?.pushViewController(
             HomeViewController.instantiate(
-                presenter: DefaultHomeViewPresenter(fetchImagesUseCase: StandardFetchImagesUseCase())),
-                                                 animated: true)
+                presenter: DefaultHomeViewPresenter(
+                    authorizePhotosUseCase: DefaultAuthorizePhotosUseCase(provider: mediaProvider),
+                    fetchImagesUseCase: DefaultFetchImagesUseCase(provider: mediaProvider)
+                )),
+            animated: true)
     }
     /*
     // MARK: - Navigation

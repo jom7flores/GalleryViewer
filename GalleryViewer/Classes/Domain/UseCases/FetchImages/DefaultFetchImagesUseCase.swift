@@ -8,10 +8,12 @@
 import Foundation
 import Combine
 
-class StandardFetchImagesUseCase: FetchImagesUseCase {
+class DefaultFetchImagesUseCase: FetchImagesUseCase {
 
-    init() {
-        
+    private let provider: LocalImageProvider
+
+    init(provider: LocalImageProvider) {
+        self.provider = provider
     }
     
     func start() -> AnyPublisher<[ImageThumbnail], Error> {

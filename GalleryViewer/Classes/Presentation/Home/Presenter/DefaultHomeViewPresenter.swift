@@ -9,12 +9,18 @@ import Combine
 import Foundation
 import UIKit
 
+enum HomeViewError: Error {
+    case notAuthorized
+    case unknown
+}
+
 class DefaultHomeViewPresenter: HomeViewPresenter {
 
     private var items: [ImageThumbnail] = []
     private var scale: CGFloat = 1
     private var isFavoriteSelected = false
     private let fetchImagesUseCase: FetchImagesUseCase
+    private let authorizePhotosUseCase: AuthorizePhotosUseCase
     private var cancellables = Set<AnyCancellable>()
     weak var view: HomeView?
 
@@ -23,8 +29,9 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
     var sections: Int = 1
 
     // MARK: - init
-    init(fetchImagesUseCase: FetchImagesUseCase) {
+    init(authorizePhotosUseCase: AuthorizePhotosUseCase, fetchImagesUseCase: FetchImagesUseCase) {
         self.fetchImagesUseCase = fetchImagesUseCase
+        self.authorizePhotosUseCase = authorizePhotosUseCase
     }
 
     // MARK: - View attachment
@@ -34,7 +41,24 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
 
     // MARK: - Life cycle
     func viewDidLoad() {
-        fetchImagesUseCase.start()
+        authorizePhotosUseCase.start()
+            .tryMap { status -> AnyPublisher<Void, Never> in
+                switch status {
+                case .authorized:
+                    return Just(Void()).eraseToAnyPublisher()
+                case .denied:
+                    throw HomeViewError.notAuthorized
+                }
+            }
+            .flatMap { [weak self] _ -> AnyPublisher<[ImageThumbnail], Error> in
+                guard let self = self else {
+                    return Result<[ImageThumbnail], Error>
+                        .failure(HomeViewError.unknown)
+                        .publisher
+                        .eraseToAnyPublisher()
+                }
+                return self.fetchImagesUseCase.start()
+            }
             .receive(on: DispatchQueue.main)
             .sink { _ in } receiveValue: { [weak self] items in
                 self?.handleReceiveItems(items)
