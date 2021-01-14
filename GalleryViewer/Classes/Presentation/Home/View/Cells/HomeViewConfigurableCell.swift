@@ -9,4 +9,5 @@ import Foundation
 
 protocol HomeViewConfigurableCell {
     func setup(with model: ImageThumbnail)
+    var delegate: HomeViewCellDelegate? { get set }
 }

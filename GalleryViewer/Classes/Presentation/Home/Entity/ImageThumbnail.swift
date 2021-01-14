@@ -13,4 +13,5 @@ struct ImageThumbnail {
     let dateAdded: Date
     let location: CLLocationCoordinate2D?
     var resource: UIImage?
+    var isFavorite: Bool
 }

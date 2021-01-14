@@ -9,4 +9,5 @@ import Foundation
 
 protocol HomeView: class {
     func dataDidLoad()
+    func requestLayoutUpdate()
 }

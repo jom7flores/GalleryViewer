@@ -26,6 +26,8 @@
 		C345916825AE6A4500206914 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C345916725AE6A4500206914 /* Main.storyboard */; };
 		C345917025AE6AAA00206914 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C345916F25AE6AAA00206914 /* MainViewController.swift */; };
 		C34591BD25AE6CFE00206914 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34591BC25AE6CFE00206914 /* HomeView.swift */; };
+		C34591C825AE74EF00206914 /* HomeViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34591C725AE74EE00206914 /* HomeViewCellDelegate.swift */; };
+		C3459A2725AFCAEE00206914 /* GalleryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459A2625AFCAEB00206914 /* GalleryLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		C345916725AE6A4500206914 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = GalleryViewer/Classes/Presentation/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		C345916F25AE6AAA00206914 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C34591BC25AE6CFE00206914 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C34591C725AE74EE00206914 /* HomeViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellDelegate.swift; sourceTree = "<group>"; };
+		C3459A2625AFCAEB00206914 /* GalleryLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,7 @@
 				C34591BC25AE6CFE00206914 /* HomeView.swift */,
 				C34590FC25AE33D700206914 /* HomeViewController.swift */,
 				C345916225AE68B500206914 /* Home.storyboard */,
+				C3459A2625AFCAEB00206914 /* GalleryLayout.swift */,
 				C345914425AE58CE00206914 /* Cells */,
 			);
 			path = View;
@@ -245,6 +250,7 @@
 				C345912725AE3A6800206914 /* ThumbnailCell.xib */,
 				C345912C25AE3A9C00206914 /* ThumbnailCell.swift */,
 				C345913A25AE3DD200206914 /* HomeViewConfigurableCell.swift */,
+				C34591C725AE74EE00206914 /* HomeViewCellDelegate.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -382,12 +388,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C345912D25AE3A9C00206914 /* ThumbnailCell.swift in Sources */,
+				C34591C825AE74EF00206914 /* HomeViewCellDelegate.swift in Sources */,
 				C345917025AE6AAA00206914 /* MainViewController.swift in Sources */,
 				C345912025AE396D00206914 /* ImageThumbnail.swift in Sources */,
 				C345915825AE621B00206914 /* LoadableViewController.swift in Sources */,
 				C345913B25AE3DD200206914 /* HomeViewConfigurableCell.swift in Sources */,
 				C34590B725AE2DB900206914 /* AppDelegate.swift in Sources */,
 				C34590B925AE2DB900206914 /* SceneDelegate.swift in Sources */,
+				C3459A2725AFCAEE00206914 /* GalleryLayout.swift in Sources */,
 				C345911725AE385C00206914 /* HomeViewPresenter.swift in Sources */,
 				C345913325AE3B8300206914 /* ReusableCell.swift in Sources */,
 				C34591BD25AE6CFE00206914 /* HomeView.swift in Sources */,
