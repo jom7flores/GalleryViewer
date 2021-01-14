@@ -17,7 +17,9 @@ class MainViewController: UIViewController {
     
 
     @IBAction func moevete() {
-        navigationController?.pushViewController(HomeViewController.instantiate(presenter: DefaultHomeViewPresenter()),
+        navigationController?.pushViewController(
+            HomeViewController.instantiate(
+                presenter: DefaultHomeViewPresenter(fetchImagesUseCase: StandardFetchImagesUseCase())),
                                                  animated: true)
     }
     /*

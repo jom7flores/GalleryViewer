@@ -2,7 +2,7 @@
 //  HomeViewCellDelegate.swift
 //  GalleryViewer
 //
-//  Created by Josue Inchaurregui on 1/12/21.
+//  Created by Josue Flores on 1/12/21.
 //
 
 import Foundation
