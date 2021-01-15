@@ -54,7 +54,7 @@ class HomeViewController: UIViewController, LoadableViewController {
  
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-
+        
         coordinator.animate(alongsideTransition: nil) { [weak self] _ in
             guard let self = self else { return }
             self.presenter.willModifyViewSize(size: self.collectionSize)
@@ -92,10 +92,6 @@ extension HomeViewController: HomeView {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = itemSize
         collectionView.setCollectionViewLayout(layout, animated: true)
-    }
-
-    func reloadItem(at indexPath: IndexPath) {
-        collectionView.reloadItems(at: [indexPath])
     }
 
     func performUpdates(_ update: Update) {
