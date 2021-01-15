@@ -53,7 +53,7 @@ class DefaultLocalImageProvider: LocalImageProvider {
         return Future { promise in
             DispatchQueue.global().async {
                 let options = PHFetchOptions()
-                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
                 options.predicate = NSPredicate(format: "mediaType == %ld", PHAssetMediaType.image.rawValue)
                 let result = PHAsset.fetchAssets(with: options)
                 promise(.success(result.objects(at: IndexSet(0..<result.count))))

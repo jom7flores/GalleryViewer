@@ -31,13 +31,6 @@
                                     <outlet property="delegate" destination="Hbs-78-b0l" id="rga-Xe-QVZ"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0NP-vN-rCc">
-                                <rect key="frame" x="338" y="732" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="toggleFav" destination="Hbs-78-b0l" eventType="touchUpInside" id="ZyS-HB-t1Q"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zZ9-3u-rzu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -45,8 +38,6 @@
                             <constraint firstItem="PWs-hj-wPO" firstAttribute="leading" secondItem="zZ9-3u-rzu" secondAttribute="leading" id="1By-xU-n83"/>
                             <constraint firstItem="PWs-hj-wPO" firstAttribute="trailing" secondItem="zZ9-3u-rzu" secondAttribute="trailing" id="A7E-gP-OXx"/>
                             <constraint firstAttribute="bottom" secondItem="PWs-hj-wPO" secondAttribute="bottom" id="KyO-1a-g2B"/>
-                            <constraint firstItem="zZ9-3u-rzu" firstAttribute="bottom" secondItem="0NP-vN-rCc" secondAttribute="bottom" constant="100" id="Mvs-FW-7VP"/>
-                            <constraint firstItem="zZ9-3u-rzu" firstAttribute="trailing" secondItem="0NP-vN-rCc" secondAttribute="trailing" constant="30" id="bKy-Wb-eC8"/>
                             <constraint firstItem="PWs-hj-wPO" firstAttribute="top" secondItem="WZh-xN-kLU" secondAttribute="top" id="hYz-wl-aWy"/>
                         </constraints>
                     </view>

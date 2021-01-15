@@ -18,7 +18,6 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
 
     private var items: [ImageThumbnail] = []
     private var scale: CGFloat = 1
-    private var isFavoriteSelected = false
     private let fetchImagesUseCase: FetchImagesUseCase
     private let authorizePhotosUseCase: AuthorizePhotosUseCase
     private let loadImageUseCase: LoadImageUseCase
@@ -27,6 +26,7 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
 
     private var favoriteIndexList: [Int] = []
 
+    private(set) var isFavoriteSelected = false
     var sections: Int = 1
 
     // MARK: - init
@@ -92,18 +92,41 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
         return items[index]
     }
 
-    func itemUpdate() -> Update {
-        if isFavoriteSelected {
-            let total = Set(0..<items.count).subtracting(favoriteIndexList)
-            return .delete(total.map { IndexPath(row: $0, section: 0) })
-        } else {
-            let total = Set(0..<items.count).subtracting(favoriteIndexList)
-            return .add(total.map { IndexPath(row: $0, section: 0) })
+    // MARK: - Layout scale
+    private(set) var columns: Int = 3
+    private var initialUpdateColumns = 0
+
+    func startScaling() {
+        initialUpdateColumns = columns
+    }
+
+    func scaleUpdate(value: CGFloat) {
+        let newColumnCount = Int(CGFloat(initialUpdateColumns) / value)
+        guard newColumnCount > 1 && newColumnCount < 12 else {
+            return
         }
+        guard columns != newColumnCount else {
+            return
+        }
+        columns = newColumnCount
+        view?.updateColumnNumber(columns)
     }
 
     func toggleFavorite() {
         isFavoriteSelected.toggle()
+
+        if items.count > 1000 {
+            view?.dataDidLoad()
+            return
+        }
+
+        if isFavoriteSelected {
+            let total = Set(0..<items.count).subtracting(favoriteIndexList)
+            view?.performUpdates(.delete(total.map { IndexPath(row: $0, section: 0) }))
+        } else {
+            let total = Set(0..<items.count).subtracting(favoriteIndexList)
+            view?.performUpdates(.add(total.map { IndexPath(row: $0, section: 0) }))
+        }
     }
 
     func toggleFavorite(with id: String) {
@@ -118,7 +141,6 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
     }
 
     private func handleImageResponse(image: UIImage?, itemIndex: Int) {
-        print(itemIndex)
         items[itemIndex].resourceSubject.send(.loaded(image))
     }
 }

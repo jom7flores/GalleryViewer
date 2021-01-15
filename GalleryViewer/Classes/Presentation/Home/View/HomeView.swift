@@ -11,4 +11,6 @@ protocol HomeView: class {
     func dataDidLoad()
     func requestLayoutUpdate()
     func reloadItem(at indexPath: IndexPath)
+    func performUpdates(_ update: Update)
+    func updateColumnNumber(_ columns: Int)
 }

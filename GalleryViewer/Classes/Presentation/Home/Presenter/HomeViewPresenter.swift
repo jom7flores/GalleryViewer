@@ -13,11 +13,15 @@ protocol HomeViewPresenter {
     func attach(view: HomeView)
     func viewDidLoad()
 
+    var isFavoriteSelected: Bool { get }
     func toggleFavorite()
     func toggleFavorite(with id: String)
     func onScaleUpdateReceived(_ scale: CGFloat, bounds: CGRect)
-    func itemUpdate() -> Update
 
+    var columns: Int { get }
+    func startScaling()
+    func scaleUpdate(value: CGFloat)
+    
     var elementsSize: CGSize { get }
     var sections: Int { get }
     func numberOfItems(for section: Int) -> Int

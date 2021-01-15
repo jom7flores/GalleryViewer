@@ -7,34 +7,23 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-    
-
-    @IBAction func moevete() {
         let mediaProvider = DefaultLocalImageProvider()
-        navigationController?.pushViewController(
-            HomeViewController.instantiate(
-                presenter: DefaultHomeViewPresenter(
-                    authorizePhotosUseCase: DefaultAuthorizePhotosUseCase(provider: mediaProvider),
-                    fetchImagesUseCase: DefaultFetchImagesUseCase(provider: mediaProvider),
-                    loadImageUseCase: DefaultLoadImageUseCase(provider: mediaProvider)
-                )),
-            animated: true)
+        setViewControllers(
+            [
+                HomeViewController.instantiate(
+                    presenter: DefaultHomeViewPresenter(
+                        authorizePhotosUseCase: DefaultAuthorizePhotosUseCase(provider: mediaProvider),
+                        fetchImagesUseCase: DefaultFetchImagesUseCase(provider: mediaProvider),
+                        loadImageUseCase: DefaultLoadImageUseCase(provider: mediaProvider)
+                    )
+                )
+            ],
+            animated: false
+        )
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
