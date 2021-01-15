@@ -30,7 +30,7 @@ extension PHAsset {
             id: localIdentifier,
             dateAdded: creationDate,
             location: location?.coordinate,
-            resource: nil,
+            resourceState: .none,
             isFavorite: isFavorite
         )
     }

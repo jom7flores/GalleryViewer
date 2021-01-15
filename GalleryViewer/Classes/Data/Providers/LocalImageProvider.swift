@@ -7,8 +7,10 @@
 
 import Combine
 import Photos
+import UIKit
 
 protocol LocalImageProvider {
     func requestMediaAccess() -> AnyPublisher<PHAuthorizationStatus, Never>
     func fetchAssets() -> AnyPublisher<[PHAsset], Error>
+    func loadAsset(with identifier: String) -> AnyPublisher<UIImage?, Never>
 }

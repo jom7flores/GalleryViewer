@@ -35,6 +35,8 @@
 		C3459A4D25AFF57800206914 /* AuthorizePhotosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459A4C25AFF57700206914 /* AuthorizePhotosUseCase.swift */; };
 		C3459A5525AFF5BC00206914 /* AuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459A5425AFF5BC00206914 /* AuthorizationStatus.swift */; };
 		C3459A5A25AFF60A00206914 /* DefaultAuthorizePhotosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459A5925AFF60A00206914 /* DefaultAuthorizePhotosUseCase.swift */; };
+		C3459FE525B0C7C400206914 /* LoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459FE425B0C7C300206914 /* LoadImageUseCase.swift */; };
+		C3459FED25B0C86000206914 /* DefaultLoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459FEC25B0C86000206914 /* DefaultLoadImageUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		C3459A4C25AFF57700206914 /* AuthorizePhotosUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizePhotosUseCase.swift; sourceTree = "<group>"; };
 		C3459A5425AFF5BC00206914 /* AuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationStatus.swift; sourceTree = "<group>"; };
 		C3459A5925AFF60A00206914 /* DefaultAuthorizePhotosUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthorizePhotosUseCase.swift; sourceTree = "<group>"; };
+		C3459FE425B0C7C300206914 /* LoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageUseCase.swift; sourceTree = "<group>"; };
+		C3459FEC25B0C86000206914 /* DefaultLoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoadImageUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +288,7 @@
 		C3459A2F25AFE8D700206914 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				C3459FE325B0C7AF00206914 /* LoadImage */,
 				C3459A4B25AFF54F00206914 /* AuthorizePhotos */,
 				C3459A2E25AFE8CA00206914 /* FetchImages */,
 			);
@@ -306,6 +311,15 @@
 				C3459A5925AFF60A00206914 /* DefaultAuthorizePhotosUseCase.swift */,
 			);
 			path = AuthorizePhotos;
+			sourceTree = "<group>";
+		};
+		C3459FE325B0C7AF00206914 /* LoadImage */ = {
+			isa = PBXGroup;
+			children = (
+				C3459FE425B0C7C300206914 /* LoadImageUseCase.swift */,
+				C3459FEC25B0C86000206914 /* DefaultLoadImageUseCase.swift */,
+			);
+			path = LoadImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,6 +456,7 @@
 			files = (
 				C345912D25AE3A9C00206914 /* ThumbnailCell.swift in Sources */,
 				C34591C825AE74EF00206914 /* HomeViewCellDelegate.swift in Sources */,
+				C3459FED25B0C86000206914 /* DefaultLoadImageUseCase.swift in Sources */,
 				C345917025AE6AAA00206914 /* MainViewController.swift in Sources */,
 				C345912025AE396D00206914 /* ImageThumbnail.swift in Sources */,
 				C345915825AE621B00206914 /* LoadableViewController.swift in Sources */,
@@ -453,6 +468,7 @@
 				C34590B925AE2DB900206914 /* SceneDelegate.swift in Sources */,
 				C3459A3925AFE96400206914 /* DefaultFetchImagesUseCase.swift in Sources */,
 				C3459A2725AFCAEE00206914 /* GalleryLayout.swift in Sources */,
+				C3459FE525B0C7C400206914 /* LoadImageUseCase.swift in Sources */,
 				C345911725AE385C00206914 /* HomeViewPresenter.swift in Sources */,
 				C3459A5525AFF5BC00206914 /* AuthorizationStatus.swift in Sources */,
 				C3459A3F25AFEE8F00206914 /* LocalImageProvider.swift in Sources */,
@@ -629,6 +645,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22Y6G3BAJZ;
 				INFOPLIST_FILE = GalleryViewer/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -647,6 +664,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22Y6G3BAJZ;
 				INFOPLIST_FILE = GalleryViewer/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

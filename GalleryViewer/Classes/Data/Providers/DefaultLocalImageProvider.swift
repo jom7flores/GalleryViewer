@@ -7,9 +7,16 @@
 
 import Combine
 import Photos
+import UIKit
 
 class DefaultLocalImageProvider: LocalImageProvider {
 
+    let imageLoadQueue: DispatchQueue
+    
+    init() {
+        imageLoadQueue = DispatchQueue(label: "imageLoadingThread", qos: .userInitiated)
+    }
+    
     var status: PHAuthorizationStatus {
         if #available(iOS 14, *) {
             return PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -55,6 +62,32 @@ class DefaultLocalImageProvider: LocalImageProvider {
         .eraseToAnyPublisher()
     }
 
+    func loadAsset(with identifier: String) -> AnyPublisher<UIImage?, Never> {
+        let value = PassthroughSubject<UIImage?, Never>()
+
+        imageLoadQueue.async { [value] in
+            let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
+            guard let phAsset = fetchResult.firstObject else {
+                return
+            }
+            let options = PHImageRequestOptions()
+            options.version = .current
+            options.resizeMode = PHImageRequestOptionsResizeMode.fast
+            options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
+            options.isNetworkAccessAllowed = true
+
+            PHImageManager.default().requestImage(
+                for: phAsset,
+                targetSize: CGSize(width: 300, height: 300),
+                contentMode: .aspectFill,
+                options: options
+            ) { image, _ in
+                value.send(image)
+            }
+        }
+
+        return value.eraseToAnyPublisher()
+    }
 }
 
 enum ImageProviderError: Error {

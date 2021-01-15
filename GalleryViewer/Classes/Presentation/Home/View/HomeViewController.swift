@@ -66,12 +66,17 @@ class HomeViewController: UIViewController, LoadableViewController {
 }
 
 extension HomeViewController: HomeView {
-    func dataDidLoad(){
+    func dataDidLoad() {
         collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 
     func requestLayoutUpdate() {
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+
+    func reloadItem(at indexPath: IndexPath) {
+        collectionView.reloadItems(at: [indexPath])
     }
 }
 
@@ -106,8 +111,8 @@ extension HomeViewController: UICollectionViewDataSource {
         let model = presenter.contentForItem(at: indexPath)
 
         if var configurable = cell as? HomeViewConfigurableCell {
-            configurable.setup(with: model)
             configurable.delegate = self
+            configurable.setup(with: model)
         }
 
         return cell

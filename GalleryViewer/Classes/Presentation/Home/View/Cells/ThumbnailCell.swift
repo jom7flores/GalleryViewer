@@ -5,6 +5,7 @@
 //  Created by Josue Flores on 1/12/21.
 //
 
+import Combine
 import UIKit
 
 class ThumbnailCell: UICollectionViewCell, ReusableCell, HomeViewConfigurableCell {
@@ -14,13 +15,18 @@ class ThumbnailCell: UICollectionViewCell, ReusableCell, HomeViewConfigurableCel
 
     weak var delegate: HomeViewCellDelegate?
 
-    static var heartImage = UIImage(systemName: "heart")
-    static var heartFillImage = UIImage(systemName: "heart.fill")
+    private static var heartImage = UIImage(systemName: "heart")
+    private static var heartFillImage = UIImage(systemName: "heart.fill")
 
+    private var cancellable: AnyCancellable?
     private var id: String?
 
     func setup(with model: ImageThumbnail) {
-        image.image = model.resource
+        cancellable?.cancel()
+        image.image = model.resourceSubject.value.resource
+        cancellable = model.resourceSubject.eraseToAnyPublisher().sink { [weak self] state in
+            self?.image.image = state.resource
+        }
         favButton.setImage(model.isFavorite ? Self.heartFillImage : Self.heartImage, for: .normal)
         id = model.id
     }

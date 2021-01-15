@@ -10,4 +10,5 @@ import Foundation
 protocol HomeView: class {
     func dataDidLoad()
     func requestLayoutUpdate()
+    func reloadItem(at indexPath: IndexPath)
 }

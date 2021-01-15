@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="310" height="294"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HlP-XS-wgh">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HlP-XS-wgh">
                         <rect key="frame" x="0.0" y="0.0" width="310" height="294"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVR-Ha-4qF">
@@ -37,9 +37,9 @@
                     <constraint firstAttribute="trailing" secondItem="WVR-Ha-4qF" secondAttribute="trailing" id="DEf-Cq-d6z"/>
                     <constraint firstItem="WVR-Ha-4qF" firstAttribute="top" secondItem="3iK-Cn-dbT" secondAttribute="top" id="Fge-9q-Uj8"/>
                     <constraint firstItem="HlP-XS-wgh" firstAttribute="top" secondItem="3iK-Cn-dbT" secondAttribute="top" id="GWZ-fc-pfw"/>
-                    <constraint firstAttribute="trailing" secondItem="HlP-XS-wgh" secondAttribute="trailing" id="bU8-pO-kqp"/>
+                    <constraint firstItem="HlP-XS-wgh" firstAttribute="trailing" secondItem="3iK-Cn-dbT" secondAttribute="trailing" id="bU8-pO-kqp"/>
                     <constraint firstItem="HlP-XS-wgh" firstAttribute="leading" secondItem="3iK-Cn-dbT" secondAttribute="leading" id="dLp-Ef-Lr6"/>
-                    <constraint firstAttribute="bottom" secondItem="HlP-XS-wgh" secondAttribute="bottom" id="mOD-Uo-O5h"/>
+                    <constraint firstItem="HlP-XS-wgh" firstAttribute="bottom" secondItem="3iK-Cn-dbT" secondAttribute="bottom" id="mOD-Uo-O5h"/>
                 </constraints>
             </collectionViewCellContentView>
             <color key="backgroundColor" systemColor="systemOrangeColor"/>

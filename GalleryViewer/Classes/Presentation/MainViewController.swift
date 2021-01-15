@@ -22,7 +22,8 @@ class MainViewController: UIViewController {
             HomeViewController.instantiate(
                 presenter: DefaultHomeViewPresenter(
                     authorizePhotosUseCase: DefaultAuthorizePhotosUseCase(provider: mediaProvider),
-                    fetchImagesUseCase: DefaultFetchImagesUseCase(provider: mediaProvider)
+                    fetchImagesUseCase: DefaultFetchImagesUseCase(provider: mediaProvider),
+                    loadImageUseCase: DefaultLoadImageUseCase(provider: mediaProvider)
                 )),
             animated: true)
     }
