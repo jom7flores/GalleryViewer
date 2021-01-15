@@ -2,7 +2,7 @@
 //  LoadImageUseCase.swift
 //  GalleryViewer
 //
-//  Created by Josue Inchaurregui on 1/14/21.
+//  Created by Josue Flores on 1/14/21.
 //
 
 import Combine

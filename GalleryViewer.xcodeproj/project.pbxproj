@@ -37,6 +37,9 @@
 		C3459A5A25AFF60A00206914 /* DefaultAuthorizePhotosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459A5925AFF60A00206914 /* DefaultAuthorizePhotosUseCase.swift */; };
 		C3459FE525B0C7C400206914 /* LoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459FE425B0C7C300206914 /* LoadImageUseCase.swift */; };
 		C3459FED25B0C86000206914 /* DefaultLoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3459FEC25B0C86000206914 /* DefaultLoadImageUseCase.swift */; };
+		C35D22CB25B2182400A0F14D /* HomeViewPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D22CA25B2182300A0F14D /* HomeViewPresenterTests.swift */; };
+		C35D22D025B21A5F00A0F14D /* MockUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D22CF25B21A5F00A0F14D /* MockUseCases.swift */; };
+		C35D22D525B21C1900A0F14D /* MockHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D22D425B21C1900A0F14D /* MockHomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,9 @@
 		C3459A5925AFF60A00206914 /* DefaultAuthorizePhotosUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthorizePhotosUseCase.swift; sourceTree = "<group>"; };
 		C3459FE425B0C7C300206914 /* LoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageUseCase.swift; sourceTree = "<group>"; };
 		C3459FEC25B0C86000206914 /* DefaultLoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoadImageUseCase.swift; sourceTree = "<group>"; };
+		C35D22CA25B2182300A0F14D /* HomeViewPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPresenterTests.swift; sourceTree = "<group>"; };
+		C35D22CF25B21A5F00A0F14D /* MockUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUseCases.swift; sourceTree = "<group>"; };
+		C35D22D425B21C1900A0F14D /* MockHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,9 @@
 			children = (
 				C34590CD25AE2DBC00206914 /* GalleryViewerTests.swift */,
 				C34590CF25AE2DBC00206914 /* Info.plist */,
+				C35D22CA25B2182300A0F14D /* HomeViewPresenterTests.swift */,
+				C35D22CF25B21A5F00A0F14D /* MockUseCases.swift */,
+				C35D22D425B21C1900A0F14D /* MockHomeView.swift */,
 			);
 			path = GalleryViewerTests;
 			sourceTree = "<group>";
@@ -484,7 +493,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C35D22CB25B2182400A0F14D /* HomeViewPresenterTests.swift in Sources */,
+				C35D22D025B21A5F00A0F14D /* MockUseCases.swift in Sources */,
 				C34590CE25AE2DBC00206914 /* GalleryViewerTests.swift in Sources */,
+				C35D22D525B21C1900A0F14D /* MockHomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

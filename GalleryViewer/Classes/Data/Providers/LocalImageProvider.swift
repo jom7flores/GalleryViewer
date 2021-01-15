@@ -2,7 +2,7 @@
 //  LocalImageProvider.swift
 //  GalleryViewer
 //
-//  Created by Josue Inchaurregui on 1/13/21.
+//  Created by Josue Flores on 1/13/21.
 //
 
 import Combine
@@ -12,5 +12,5 @@ import UIKit
 protocol LocalImageProvider {
     func requestMediaAccess() -> AnyPublisher<PHAuthorizationStatus, Never>
     func fetchAssets() -> AnyPublisher<[PHAsset], Error>
-    func loadAsset(with identifier: String) -> AnyPublisher<UIImage?, Never>
+    func loadAsset(with identifier: String, mode: ImageProviderLoadingMode, targetSize: CGSize) -> AnyPublisher<UIImage?, Never>
 }

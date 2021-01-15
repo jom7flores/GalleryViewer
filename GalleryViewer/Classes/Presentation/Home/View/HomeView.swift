@@ -6,11 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol HomeView: class {
     func dataDidLoad()
-    func requestLayoutUpdate()
+    func requestLayoutUpdate(itemSize: CGSize)
     func reloadItem(at indexPath: IndexPath)
     func performUpdates(_ update: Update)
-    func updateColumnNumber(_ columns: Int)
 }

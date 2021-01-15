@@ -14,8 +14,8 @@ class HomeViewController: UIViewController, LoadableViewController {
 
     let presenter: HomeViewPresenter
 
-    private var collectionWidth: CGFloat {
-        collectionView.safeAreaLayoutGuide.layoutFrame.width
+    private var collectionSize: CGSize {
+        collectionView.safeAreaLayoutGuide.layoutFrame.size
     }
 
     required init?(presenter: HomeViewPresenter, coder: NSCoder) {
@@ -43,15 +43,25 @@ class HomeViewController: UIViewController, LoadableViewController {
 
         presenter.attach(view: self)
         presenter.viewDidLoad()
-        
+
         let gesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction))
         collectionView.addGestureRecognizer(gesture)
 
-        collectionView.collectionViewLayout = layout(using: presenter.columns)
+        presenter.willModifyViewSize(size: collectionSize)
 
         navigationController?.hidesBarsOnSwipe = true
     }
+ 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            guard let self = self else { return }
+            self.presenter.willModifyViewSize(size: self.collectionSize)
+        }
+    }
+
+    // MARK: - Actions
     @IBAction func pinchAction(_ gestureRecognizer : UIPinchGestureRecognizer) {
         guard gestureRecognizer.view != nil else { return }
 
@@ -70,15 +80,6 @@ class HomeViewController: UIViewController, LoadableViewController {
         favoriteButton.setImage(presenter.isFavoriteSelected ? Self.heartFillImage : Self.heartImage,
                                 for: .normal)        
     }
-
-    private func layout(using columns: Int) -> UICollectionViewFlowLayout {
-        let interPadding: CGFloat = columns > 8 ? 2 : 10
-        let layout = UICollectionViewFlowLayout()
-        let columnsFloat = CGFloat(columns)
-        let size = (collectionWidth - ((columnsFloat - 1) * interPadding)) / columnsFloat
-        layout.itemSize = .init(width: size, height: size)
-        return layout
-    }
 }
 
 extension HomeViewController: HomeView {
@@ -87,8 +88,10 @@ extension HomeViewController: HomeView {
         collectionView.collectionViewLayout.invalidateLayout()
     }
 
-    func requestLayoutUpdate() {
-        collectionView.collectionViewLayout.invalidateLayout()
+    func requestLayoutUpdate(itemSize: CGSize) {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = itemSize
+        collectionView.setCollectionViewLayout(layout, animated: true)
     }
 
     func reloadItem(at indexPath: IndexPath) {
@@ -104,10 +107,6 @@ extension HomeViewController: HomeView {
                 self?.collectionView.deleteItems(at: items)
             }
         } completion: { _ in }
-    }
-
-    func updateColumnNumber(_ columns: Int) {
-        collectionView.setCollectionViewLayout(layout(using: columns), animated: true)
     }
 }
 

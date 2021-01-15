@@ -24,6 +24,8 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
     private var cancellables = Set<AnyCancellable>()
     weak var view: HomeView?
 
+    private var itemSize: CGFloat = .zero
+    private var targetSize: CGSize = .zero
     private var favoriteIndexList: [Int] = []
 
     private(set) var isFavoriteSelected = false
@@ -93,7 +95,7 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
     }
 
     // MARK: - Layout scale
-    private(set) var columns: Int = 3
+    private var columns: Int = 3
     private var initialUpdateColumns = 0
 
     func startScaling() {
@@ -109,13 +111,34 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
             return
         }
         columns = newColumnCount
-        view?.updateColumnNumber(columns)
+
+        let interPadding: CGFloat = columns > 8 ? 2 : 10
+        let columnsFloat = CGFloat(columns)
+        itemSize = (targetSize.width - ((columnsFloat - 1) * interPadding)) / columnsFloat
+
+        view?.requestLayoutUpdate(itemSize: .init(width: itemSize, height: itemSize))
+    }
+
+    func willModifyViewSize(size: CGSize) {
+        targetSize = size
+
+        let aproxPadding: CGFloat = 10
+        var columns = Int((targetSize.width + aproxPadding) / (itemSize + aproxPadding))
+        columns = max(2, columns)
+        columns = min(12, columns)
+        self.columns = columns
+        
+        let interPadding: CGFloat = columns > 8 ? 2 : 10
+        let columnsFloat = CGFloat(columns)
+        itemSize = (targetSize.width - ((columnsFloat - 1) * interPadding)) / columnsFloat
+
+        view?.requestLayoutUpdate(itemSize: .init(width: itemSize, height: itemSize))
     }
 
     func toggleFavorite() {
         isFavoriteSelected.toggle()
 
-        if items.count > 1000 {
+        if items.count > 5000 {
             view?.dataDidLoad()
             return
         }
@@ -149,10 +172,5 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
 extension DefaultHomeViewPresenter {
     var elementsSize: CGSize {
         CGSize(width: scale * 120, height: scale * 120)
-    }
-
-    func onScaleUpdateReceived(_ scale: CGFloat, bounds: CGRect) {
-        self.scale = scale
-        self.view?.requestLayoutUpdate()
     }
 }

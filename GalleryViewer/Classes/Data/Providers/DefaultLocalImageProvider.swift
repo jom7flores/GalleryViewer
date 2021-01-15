@@ -2,7 +2,7 @@
 //  DefaultLocalImageProvider.swift
 //  GalleryViewer
 //
-//  Created by Josue Inchaurregui on 1/13/21.
+//  Created by Josue Flores on 1/13/21.
 //
 
 import Combine
@@ -16,7 +16,7 @@ class DefaultLocalImageProvider: LocalImageProvider {
     init() {
         imageLoadQueue = DispatchQueue(label: "imageLoadingThread", qos: .userInitiated)
     }
-    
+
     var status: PHAuthorizationStatus {
         if #available(iOS 14, *) {
             return PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -62,7 +62,7 @@ class DefaultLocalImageProvider: LocalImageProvider {
         .eraseToAnyPublisher()
     }
 
-    func loadAsset(with identifier: String) -> AnyPublisher<UIImage?, Never> {
+    func loadAsset(with identifier: String, mode: ImageProviderLoadingMode, targetSize: CGSize) -> AnyPublisher<UIImage?, Never> {
         let value = PassthroughSubject<UIImage?, Never>()
 
         imageLoadQueue.async { [value] in
@@ -72,13 +72,13 @@ class DefaultLocalImageProvider: LocalImageProvider {
             }
             let options = PHImageRequestOptions()
             options.version = .current
-            options.resizeMode = PHImageRequestOptionsResizeMode.fast
-            options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
+            options.resizeMode = mode == .fast ? .fast : .exact
+            options.deliveryMode = mode == .fast ? .opportunistic : .highQualityFormat
             options.isNetworkAccessAllowed = true
 
             PHImageManager.default().requestImage(
                 for: phAsset,
-                targetSize: CGSize(width: 300, height: 300),
+                targetSize: targetSize,
                 contentMode: .aspectFill,
                 options: options
             ) { image, _ in
@@ -92,4 +92,9 @@ class DefaultLocalImageProvider: LocalImageProvider {
 
 enum ImageProviderError: Error {
     case notAuthorized
+}
+
+enum ImageProviderLoadingMode {
+    case fast
+    case exact
 }

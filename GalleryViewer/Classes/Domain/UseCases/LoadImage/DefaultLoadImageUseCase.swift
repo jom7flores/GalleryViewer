@@ -2,7 +2,7 @@
 //  DefaultLoadImageUseCase.swift
 //  GalleryViewer
 //
-//  Created by Josue Inchaurregui on 1/14/21.
+//  Created by Josue Flores on 1/14/21.
 //
 
 import Combine
@@ -17,6 +17,6 @@ class DefaultLoadImageUseCase: LoadImageUseCase {
     }
 
     func start(imageId: String) -> AnyPublisher<UIImage?, Never> {
-        provider.loadAsset(with: imageId)
+        provider.loadAsset(with: imageId, mode: .fast, targetSize: .init(width: 350, height: 350))
     }
 }
