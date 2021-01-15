@@ -1,3 +1,3 @@
 ### Sample project
 
-![](example_gallery.gif)
+![](Example/example_gallery.gif)
