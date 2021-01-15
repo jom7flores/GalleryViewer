@@ -120,17 +120,19 @@ class DefaultHomeViewPresenter: HomeViewPresenter {
     }
 
     func willModifyViewSize(size: CGSize) {
-        targetSize = size
+        if targetSize != .zero {
+            let aproxPadding: CGFloat = 10
+            var columns = Int((size.width + aproxPadding) / (itemSize + aproxPadding))
+            columns = max(2, columns)
+            columns = min(12, columns)
+            self.columns = columns
+        }
 
-        let aproxPadding: CGFloat = 10
-        var columns = Int((targetSize.width + aproxPadding) / (itemSize + aproxPadding))
-        columns = max(2, columns)
-        columns = min(12, columns)
-        self.columns = columns
-        
         let interPadding: CGFloat = columns > 8 ? 2 : 10
         let columnsFloat = CGFloat(columns)
-        itemSize = (targetSize.width - ((columnsFloat - 1) * interPadding)) / columnsFloat
+        itemSize = (size.width - ((columnsFloat - 1) * interPadding)) / columnsFloat
+
+        targetSize = size
 
         view?.requestLayoutUpdate(itemSize: .init(width: itemSize, height: itemSize))
     }

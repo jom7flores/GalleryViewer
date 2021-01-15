@@ -42,7 +42,7 @@
                     <constraint firstItem="HlP-XS-wgh" firstAttribute="bottom" secondItem="3iK-Cn-dbT" secondAttribute="bottom" id="mOD-Uo-O5h"/>
                 </constraints>
             </collectionViewCellContentView>
-            <color key="backgroundColor" systemColor="systemOrangeColor"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <size key="customSize" width="310" height="294"/>
             <connections>
                 <outlet property="favButton" destination="WVR-Ha-4qF" id="X5Q-3f-iM2"/>
@@ -53,9 +53,6 @@
     </objects>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
