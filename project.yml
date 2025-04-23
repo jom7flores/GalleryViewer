@@ -1,0 +1,72 @@
+name: PowerETRADE
+
+options:
+    bundleIdPrefix: com.etrade-internal
+    deploymentTarget:
+        iOS: "16.6"
+    developmentLanguage: Base
+    indentWidth: 4
+    tabWidth: 4
+
+packages:
+    Alamofire: # example of Package
+        url: https://github.com/Alamofire/Alamofire.git
+        exactVersion: 4.9.1
+
+configs:
+    Debug:
+        type: debug
+    Release:
+        type: release
+
+targets:
+    PowerETRADE:
+        type: application
+        platform: iOS
+        deploymentTarget: "16.6"
+        info:
+            path: Info.plist
+        sources: [Sources]
+        excludes: [Sources/FeatureContent]
+        dependencies:
+            - package: Alamofire
+            - target: FeatureIntegration
+
+    FeatureIntegration:
+        type: framework
+        platform: iOS
+        info:
+            path: Sources/FeatureContent/Plist/FeatureInfo.plist
+        sources: [Sources/FeatureContent]
+        settings:
+            configs:
+                Release:
+                    EXCLUDE_SOURCE_FILE_NAMES: "**/*"
+        dependencies:
+            - package: Alamofire
+
+schemes:
+    ReleaseSchema:
+        build:
+            targets:
+                PowerETRADE: all
+        run:
+            config: Release
+            executable: PowerETRADE
+        test:
+            config: Release
+        archive:
+            config: Release
+
+    FeatureSchema:
+        build:
+            targets:
+                PowerETRADE: all
+                FeatureIntegration: all
+        run:
+            config: Debug
+            executable: PowerETRADE
+        test:
+            config: Debug
+        archive:
+            config: Debug
